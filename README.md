@@ -1,1 +1,4 @@
-# BadChattingGenerator
+# 악질채팅생성기
+인터넷 방소에서 악질 채팅을 편하게 쓰기위해 만든 크롬 확장프로그램
+
+![버전 1.0](./img/image1.png)
