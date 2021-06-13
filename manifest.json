@@ -6,10 +6,7 @@
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": [
-        "activeTab",
-        "tabs"
-    ],
+    "permissions": [],
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
@@ -24,6 +21,6 @@
         "32": "image/128.png",
         "48": "image/128.png",
         "128": "image/128.png"
-    },
-    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+
+    }
 }
