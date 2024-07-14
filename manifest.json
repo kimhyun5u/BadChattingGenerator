@@ -1,26 +1,27 @@
 {
-    "name": "악질채팅생성기",
-    "version": "1.1.0",
-    "description": "진정한 악질들을 위한 프로그램",
-    "manifest_version": 3,
-    "background": {
-        "service_worker": "background.js"
-    },
-    "permissions": [],
-    "action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "16": "image/128.png",
-            "32": "image/128.png",
-            "48": "image/128.png",
-            "128": "image/128.png"
-        }
-    },
-    "icons": {
-        "16": "image/128.png",
-        "32": "image/128.png",
-        "48": "image/128.png",
-        "128": "image/128.png"
-
+  "name": "악질채팅생성기",
+  "version": "1.2.0",
+  "description": "진정한 악질들을 위한 프로그램",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "host_permissions": ["*://*/*"],
+  "permissions": ["tabs", "cookies"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "image/128.png",
+      "32": "image/128.png",
+      "48": "image/128.png",
+      "128": "image/128.png"
     }
+  },
+  "icons": {
+    "16": "image/128.png",
+    "32": "image/128.png",
+    "48": "image/128.png",
+    "128": "image/128.png"
+  }
 }
