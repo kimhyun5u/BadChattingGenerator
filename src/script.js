@@ -1,11 +1,14 @@
 import * as auth from "./api/chzzk/auth.js";
 import * as chat from "./api/chzzk/chat.js";
+import * as channel from "./api/chzzk/channel.js";
 
 let result;
 let cookie;
 let channelId;
+let liveDetail;
+let accessToken;
 
-function generator() {
+const generator = () => {
   let chat = document.getElementById("chat").value;
   let n = document.getElementById("n").value;
   result = "";
@@ -15,7 +18,7 @@ function generator() {
 
   document.getElementById("output").innerText = result;
   navigator.clipboard.writeText(result);
-}
+};
 
 document.addEventListener("DOMContentLoaded", async function () {
   var convert = document.getElementById("convert");
@@ -37,8 +40,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     const result = currentTab.url.split("/");
     channelId = result[result.length - 1];
 
-    // getAccessToken 호출
-    cookie = await auth.getAccessToken();
+    // cookie 가져오기
+    cookie = await auth.getChzzkCookies();
 
     // 모든 비동기 작업이 완료된 후 로그 출력
     console.log("Channel ID:", channelId);
@@ -47,9 +50,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.error("Error:", error);
   }
 
+  // live detail 호출
+  liveDetail = await channel.getChannelDetail(channelId);
+
+  // getAccessToken 호출
+  accessToken = await auth.getAccessToken(liveDetail.content.chatChannelId);
+
+  console.log("Live Detail:", liveDetail);
+
+  console.log("Access Token:", accessToken);
+
   // connectChatWs 호출
   chat
-    .connectChatWs(channelId, cookie)
+    .connectChatWs(liveDetail.content.chatChannelId, accessToken)
     .then(() => {
       console.log("Chat connected");
     })
