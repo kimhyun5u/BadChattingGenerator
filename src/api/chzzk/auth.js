@@ -1,4 +1,18 @@
-const getAccessToken = () => {
+const getAccessToken = (channelId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const r = await fetch(
+        `https://comm-api.game.naver.com/nng_main/v1/chats/access-token?channelId=${channelId}&chatType=STREAMING`
+      );
+      const result = await r.json();
+      resolve(reject);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+const getChzzkCookies = () => {
   return new Promise((resolve, reject) => {
     chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
       if (chrome.runtime.lastError) {
@@ -34,4 +48,4 @@ const getCookie = (name, url) => {
   });
 };
 
-export { getAccessToken };
+export { getAccessToken, getChzzkCookies };
