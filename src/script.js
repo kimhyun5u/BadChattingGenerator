@@ -21,11 +21,11 @@ const generator = () => {
 document.addEventListener("DOMContentLoaded", async function () {
   var convert = document.getElementById("convert");
   convert.addEventListener("click", generator);
+  let channelId;
+  let uid;
 
   try {
     // chrome.tabs.query를 Promise로 감싸기
-    let channelId;
-
     const tabs = await new Promise((resolve, reject) => {
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         if (chrome.runtime.lastError) {
@@ -37,6 +37,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     let currentTab = tabs[0];
+
+    // uid 가져오기
+    uid = await chrome.scripting.executeScript({
+      target: { tabId: currentTab.id },
+      function: () => localStorage["userStatus.idhash"],
+    });
+    uid = uid[0].result;
+    storage.save("uid", uid);
+
     const result = currentTab.url.split("/");
     channelId = result[result.length - 1];
     await storage.save("channel-id", channelId);
@@ -65,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // connectChatWs 호출
   chat
-    .connectChatWs(liveDetail.content.chatChannelId, accessToken)
+    .connectChatWs(uid, liveDetail.content.chatChannelId, accessToken)
     .then(() => {
       console.log("Chat connected");
     })
