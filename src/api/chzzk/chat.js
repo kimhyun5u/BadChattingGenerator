@@ -1,4 +1,4 @@
-import * as middleware from "../message/middleware.js";
+import * as middleware from "../message/message.js";
 
 // 필요한 것 channelId -> url 에서 긁어 오면 됨
 // uId = token -> 쿠키에서 긁어 오면 됨 or AccessToken 발급

@@ -10,12 +10,12 @@ const processData = (data) => {
         uid: b.uid,
         utime: b.utime,
         osType: JSON.parse(b.extras).osType,
+        nick: JSON.parse(b.profile).nickname ?? "Unknown",
       };
       message_buffer.push(d);
     });
   }
-
-  console.log(message_buffer);
+  // console.log(data);
 };
 
-export { processData };
+export { message_buffer, processData };
