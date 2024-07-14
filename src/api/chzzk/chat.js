@@ -1,3 +1,5 @@
+import * as middleware from "../message/middleware.js";
+
 // 필요한 것 channelId -> url 에서 긁어 오면 됨
 // uId = token -> 쿠키에서 긁어 오면 됨 or AccessToken 발급
 const connectChatWs = (channelId, accTkn) => {
@@ -27,23 +29,7 @@ const connectChatWs = (channelId, accTkn) => {
     };
 
     ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      let processedData = [];
-
-      if (Array.isArray(data.bdy)) {
-        data.bdy.forEach((b) => {
-          const d = {
-            msg: b.msg,
-            uid: b.uid,
-            utime: b.utime,
-            osType: JSON.parse(b.extras).osType,
-          };
-          processedData.push(d);
-        });
-      }
-
-      console.log("Message:", JSON.parse(event.data));
-      console.log("Processed Message: ", processedData);
+      middleware.processData(event.data);
     };
 
     ws.onerror = (error) => {
