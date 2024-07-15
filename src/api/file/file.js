@@ -29,14 +29,25 @@ const flushBuffer = async () => {
   const channel_detail = await channel
     .getChannelDetail()
     .then((r) => r.content);
-  console.log(channel_detail);
-  const channel_data = `${channel_detail.liveTitle} ${channel_detail.channel.channelId} ${channel_detail.concurrentUserCount}\n`;
+
+  const channel_data = {
+    liveTitle: channel_detail.liveTitle,
+    channelId: channel_detail.channel.channelId,
+    currentUserCount: channel_detail.concurrentUserCount,
+  };
   const messages_data = message_buffer.map((m) => {
-    return `${m.nick} ${m.uid}: ${m.msg} ${m.osType} ${m.utime}`;
+    return {
+      nick: m.nick,
+      uid: m.uid,
+      msg: m.msg,
+      osType: m.osType,
+      utime: m.utime,
+    };
   });
 
-  const content = channel_data + messages_data.join("\n");
-  saveFile(content);
+  const content = { header: channel_data, body: messages_data };
+  //   saveFile(content);
+  console.log(content);
 };
 
 export { saveFile, flushBuffer };
