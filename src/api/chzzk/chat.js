@@ -17,7 +17,7 @@ const connectChatWs = (uid, channelId, accTkn) => {
             uid: uid,
             devType: 2001,
             accTkn: accTkn.accessToken,
-            auth: "SEND",
+            auth: uid === null ? "READ" : "SEND",
             libVer: "4.9.3",
             osVer: "macOS/10.15.7",
             devName: "Google Chrome/126.0.0.0",
