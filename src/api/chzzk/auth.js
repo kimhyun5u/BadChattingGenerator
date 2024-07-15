@@ -5,7 +5,7 @@ const getAccessToken = (channelId) => {
         `https://comm-api.game.naver.com/nng_main/v1/chats/access-token?channelId=${channelId}&chatType=STREAMING`
       );
       const result = await r.json();
-      resolve(reject);
+      resolve(result.content);
     } catch (error) {
       reject(error);
     }

@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   );
 
   console.log("Live Detail:", liveDetail);
-  console.log("Access Token:", accessToken);
+  console.log("Access Token:", accessToken.accessToken);
 
   // connectChatWs 호출
   chat
@@ -82,6 +82,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       console.error("Chat error:", error);
     });
 
-  const intervalTime = 60000; // 60초
+  const intervalTime = 10000; // 60초
   const intervalId = setInterval(file.flushBuffer, intervalTime);
 });
