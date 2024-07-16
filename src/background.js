@@ -1,4 +1,6 @@
-chrome.runtime.onInstalled.addListener(() => {
-  console.log("설치되었습.");
+chrome.action.onClicked.addListener((tab) => {
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    files: ["content.js"],
+  });
 });
-//dydrms

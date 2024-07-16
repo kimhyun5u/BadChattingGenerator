@@ -1,27 +1,23 @@
 {
   "name": "악질채팅생성기",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "description": "진정한 악질들을 위한 프로그램",
   "manifest_version": 3,
   "background": {
-    "service_worker": "src/background.js",
-    "type": "module"
+    "service_worker": "background.js"
   },
-  "host_permissions": ["*://*/*"],
-  "permissions": ["tabs", "cookies"],
+  "permissions": ["activeTab", "scripting"],
   "action": {
-    "default_popup": "popup.html",
     "default_icon": {
       "16": "image/128.png",
-      "32": "image/128.png",
       "48": "image/128.png",
       "128": "image/128.png"
     }
   },
-  "icons": {
-    "16": "image/128.png",
-    "32": "image/128.png",
-    "48": "image/128.png",
-    "128": "image/128.png"
-  }
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["content.css"]
+    }
+  ]
 }
