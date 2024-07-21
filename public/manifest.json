@@ -4,21 +4,21 @@
   "description": "진정한 악질들을 위한 프로그램",
   "manifest_version": 3,
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "host_permissions": ["*://*/*"],
   "permissions": ["tabs", "cookies", "storage", "scripting", "activeTab"],
-  "action": {
-    "default_icon": {
-      "16": "image/128.png",
-      "48": "image/128.png",
-      "128": "image/128.png"
-    }
-  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "css": ["content.css"]
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["template.html", "content.css"],
+      "matches": ["<all_urls>"]
     }
   ]
 }

@@ -1,6 +1,10 @@
+import * as script from "./script.js";
+
 console.log("content.js loaded");
 
-function createPopup() {
+script.start();
+
+const createPopup = async () => {
   console.log("createPopup function called");
 
   // 기존 팝업이 있으면 제거
@@ -10,26 +14,23 @@ function createPopup() {
     existingPopup.remove();
   }
 
+  // 템플릿 받아오기
+  const response = await fetch(chrome.runtime.getURL("template.html"));
+  const htmlTemplate = await response.text();
+
   // 팝업 생성
   const popup = document.createElement("div");
   popup.id = "custom-popup";
-  popup.innerHTML = `
-    <div class="popup-header" id="custom-popup-header">
-      <span class="close-button">&times;</span>
-      <h4>악질채팅생성기</h4>
-    </div>
-    <div class="popup-content">
-      <label>반복할 채팅:</label>
-      <input type="text" id="chat">
-      <label>반복할 횟수:</label>
-      <input type="number" value="1" id="n">
-      <button id="convert">변환</button>
-      <div id="output" style="word-break: break-all"></div>
-    </div>
-    <div class="resizer" id="resizer"></div>
-  `;
+  popup.innerHTML = htmlTemplate;
   document.body.appendChild(popup);
   console.log("Popup created and appended to body");
+
+  // CSS 스타일 삽입
+  const link = document.createElement("link");
+  link.href = chrome.runtime.getURL("content.css");
+  link.type = "text/css";
+  link.rel = "stylesheet";
+  document.head.appendChild(link);
 
   // 닫기 버튼 이벤트
   document.querySelector(".close-button").addEventListener("click", () => {
@@ -51,7 +52,7 @@ function createPopup() {
   dragElement(document.getElementById("custom-popup"));
   // 크기 조절 기능 추가
   resizableElement(document.getElementById("custom-popup"));
-}
+};
 
 function dragElement(el) {
   const header = document.getElementById(el.id + "-header");

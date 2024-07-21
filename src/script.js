@@ -2,25 +2,14 @@ import * as auth from "./api/chzzk/auth.js";
 import * as chat from "./api/chzzk/chat.js";
 import * as channel from "./api/chzzk/channel.js";
 import * as storage from "./api/chrome/storage.js";
-import * as file from "./api/file/file.js";
+import * as statics from "./api/statics/statics.js";
 
 let result;
 
-const generator = () => {
-  let chat = document.getElementById("chat").value;
-  let n = document.getElementById("n").value;
-  result = "";
-  for (let i = 0; i < n; i++) {
-    result += chat;
-  }
-
-  document.getElementById("output").innerText = result;
-  navigator.clipboard.writeText(result);
-};
-
-document.addEventListener("DOMContentLoaded", async function () {
-  var convert = document.getElementById("convert");
-  convert.addEventListener("click", generator);
+export const start = async () => {
+  console.log("Script started");
+  // var convert = document.getElementById("convert");
+  // convert.addEventListener("click", generator);
   let channelId;
   let uid;
 
@@ -83,5 +72,5 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
   const intervalTime = 10000; // 60초
-  const intervalId = setInterval(file.flushBuffer, intervalTime);
-});
+  const intervalId = setInterval(statics.getStaticsMsg, intervalTime);
+};

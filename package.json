@@ -1,17 +1,14 @@
 {
-  "name": "badchattinggenerator",
-  "version": "1.0.0",
-  "description": "인터넷 방소에서 악질 채팅을 편하게 쓰기위해 만든 크롬 확장프로그램",
-  "main": "index.js",
+  "name": "chatting-plus",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "@eslint/js": "^9.7.0",
-    "eslint": "^9.7.0",
-    "globals": "^15.8.0"
+    "vite": "^5.3.4"
   }
 }
